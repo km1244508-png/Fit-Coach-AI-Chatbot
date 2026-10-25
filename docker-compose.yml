@@ -1,0 +1,19 @@
+# Local infrastructure only (MongoDB + Qdrant). The API and frontend run on your machine.
+services:
+  mongo:
+    image: mongo:7
+    container_name: coach-mongo
+    ports: ["27017:27017"]
+    volumes: ["mongo_data:/data/db"]
+    restart: unless-stopped
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: coach-qdrant
+    ports: ["6333:6333"]
+    volumes: ["qdrant_data:/qdrant/storage"]
+    restart: unless-stopped
+
+volumes:
+  mongo_data:
+  qdrant_data:
